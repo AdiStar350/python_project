@@ -133,14 +133,17 @@ def view_summary() -> None:
     # Printing all transactions
     if transactions:
         print("\n--- Overall Summary ---")
+        print(f"{'Type':<10} {'Amount':<15} {'Category':<20} {'Date':<15}")
+        print("-" * 60)
 
         for trans in transactions:
-            print(f"Type: {trans["type"].upper()}, Amount: {trans["amount"]:10.2f}, "
-                  f"Date: {trans["date"].strftime("%d-%m-%Y")}\n")
+            print(f"{trans['type'].capitalize():<10} {trans['amount']:<15.2f} "
+                  f"{trans['category']:<20} {trans['date'].strftime('%d-%m-%Y'):<15}")
 
-        print(f"Total Income : {total_income:10.2f}")
-        print(f"Total Outcome: {total_outcome:10.2f}")
-        print(f"Total Balance: {total_balance:10.2f}")
+        print("-" * 60)
+        print(f"{'Total Income':<20}: {total_income:>15.2f}")
+        print(f"{'Total Outcome':<20}: {total_outcome:>15.2f}")
+        print(f"{'Total Balance':<20}: {total_balance:>15.2f}")
     else:
         print("No transactions found.")
 
@@ -188,14 +191,17 @@ def view_monthly_summary() -> None:
 
     # Printing all the matching transactions and the totals
     if monthly_transactions:
-        print(f"\n--- Summary for {year}-{month:02d} ---\n")
+        print(f"\n--- Summary for {month:02d}-{year} ---")
+        print(f"{'Type':<10} {'Amount':<15} {'Category':<20} {'Date':<15}")
+        print("-" * 60)
 
         for trans in monthly_transactions:
-            print(f"Type: {trans["type"].upper()}, Amount: {trans["amount"]:10.2f}, "
-                  f"Category: {trans["category"]}, Date: {trans["date"].strftime("%d-%m-%Y")}\n")
+            print(f"{trans['type'].capitalize():<10} {trans['amount']:<15.2f} "
+                  f"{trans['category']:<20} {trans['date'].strftime('%d-%m-%Y'):<15}")
 
-        print(f"Total Monthly Income : {month_income:10.2f}")
-        print(f"Total Monthly Outcome: {month_outcome:10.2f}")
+        print("-" * 60)
+        print(f"{'Total Monthly Income':<25}: {month_income:>15.2f}")
+        print(f"{'Total Monthly Outcome':<25}: {month_outcome:>15.2f}")
     else:
         print("No transactions found for this month.")
 
@@ -229,15 +235,17 @@ def filter_by_category() -> None:
 
     # Printing all the matching transactions and the totals
     if category_transactions:
-        print(f"\n--- Summary for {category} transaction ---\n")
+        print(f"\n--- Summary for Category: {category.capitalize()} ---")
+        print(f"{'Type':<10} {'Amount':<15} {'Date':<15}")
+        print("-" * 40)
 
         for trans in category_transactions:
-            print(f"Type: {trans["type"].upper()}, Amount: {trans["amount"]:10.2f}, "
-                  f"Date: {trans["date"].strftime("%d-%m-%Y")}\n")
-
+            print(f"{trans['type'].capitalize():<10} {trans['amount']:<15.2f} "
+                  f"{trans['date'].strftime('%d-%m-%Y'):<15}")
             category = category.title()
 
-            print(f"Total Income of {category} : {category_income:10.2f}")
-            print(f"Total Outcome of {category}: {category_outcome:10.2f}")
+            print("-" * 40)
+            print(f"{'Total Income' :<20}: {category_income:>15.2f}")
+            print(f"{'Total Outcome':<20}: {category_outcome:>15.2f}")
     else:
         print("No transactions found for this category.")
